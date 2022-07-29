@@ -7,6 +7,10 @@ public class UtilidadesConsola
     public readonly Regex FechaRegex = new("^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$");
     public readonly Regex EmailRegex = new("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
     
+    // Usado para validación de fechas de nacimiento y para demostrar manejo de excepciones.
+    // Elección Arbitraria, 120 años en el pasado.
+    private DateTime _minFechaNacimiento = DateTime.Now.Subtract(TimeSpan.FromDays(43800)); // 120 x 365
+    
     public int SolicitarOpcion()
     {
         MostrarMenu();
@@ -37,8 +41,8 @@ public class UtilidadesConsola
         Console.Write(texto);
         var input = Console.ReadLine();
 
-        bool validInput = false;
-        while (!validInput)
+        bool inputValido = false;
+        while (!inputValido)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -54,7 +58,7 @@ public class UtilidadesConsola
                 continue;
             }
 
-            validInput = true;
+            inputValido = true;
         }
             
         return input;
@@ -62,8 +66,15 @@ public class UtilidadesConsola
         
     public DateTime SolicitarFecha(string texto)
     {
-        var fechaNacimiento = SolicitarString(texto, FechaRegex);
-        return DateTime.Parse(fechaNacimiento);
+        var fechaStr = SolicitarString(texto, FechaRegex);
+        var fecha = DateTime.Parse(fechaStr);
+
+        if (fecha < _minFechaNacimiento)
+        {
+            throw new Exception("Fecha inválida!");
+        }
+
+        return fecha;
     }
 
     public bool SolicitarBool(string texto)
@@ -73,7 +84,7 @@ public class UtilidadesConsola
         do
         {
             input = SolicitarString(texto);
-        } while (input.ToUpper() != "S" && input.ToLower() != "N");
+        } while (input.ToUpper() != "S" && input.ToUpper() != "N");
 
         return string.Equals(input.ToUpper(), "S");
     }

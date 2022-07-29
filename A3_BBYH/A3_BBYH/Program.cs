@@ -77,26 +77,40 @@ internal class Program
     
     private static void NuevoCliente()
     {
-        Clientes.Add(new Cliente()
+        try
         {
-            NumeroCliente = _idClienteActual++,
-            Nombre = UtilsConsola.SolicitarString("Nombre: "),
-            Apellido = UtilsConsola.SolicitarString("Apellido: "),
-            FechaNacimiento = UtilsConsola.SolicitarFecha("Fecha de nacimiento (dd/mm/aaaa): "),
-            Email = UtilsConsola.SolicitarString("Email: ", UtilsConsola.EmailRegex)
-        });
+            Clientes.Add(new Cliente()
+            {
+                NumeroCliente = _idClienteActual++,
+                Nombre = UtilsConsola.SolicitarString("Nombre: "),
+                Apellido = UtilsConsola.SolicitarString("Apellido: "),
+                FechaNacimiento = UtilsConsola.SolicitarFecha("Fecha de nacimiento (dd/mm/aaaa): "),
+                Email = UtilsConsola.SolicitarString("Email: ", UtilsConsola.EmailRegex)
+            });
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
         
         Console.WriteLine();
     }
 
     private static void MostrarClientes()
     {
-        var encabezado = $"{"ID",5}|{" Nombre ",10}|{" Apellido ",10}|{" Fecha nac. ",12}|{"Email",10}";
-        Console.WriteLine(encabezado);
-        
-        foreach (var cliente in Clientes)
+        if (Clientes.Count > 0)
         {
-            Console.WriteLine(cliente.ToString());
+            var encabezado = $"{"ID",5}|{" Nombre ",10}|{" Apellido ",10}|{" Fecha nac. ",12}|{"Email",10}";
+            Console.WriteLine(encabezado);
+            
+            foreach (var cliente in Clientes)
+            {
+                Console.WriteLine(cliente.ToString());
+            }    
+        }
+        else
+        {
+            Console.WriteLine("No hay clientes registrados!");
         }
         
         Console.WriteLine();
