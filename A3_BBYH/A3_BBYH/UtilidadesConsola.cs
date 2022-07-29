@@ -9,7 +9,7 @@ public class UtilidadesConsola
     
     // Usado para validación de fechas de nacimiento y para demostrar manejo de excepciones.
     // Elección Arbitraria, 120 años en el pasado.
-    private DateTime _minFechaNacimiento = DateTime.Now.Subtract(TimeSpan.FromDays(43800)); // 120 x 365
+    private readonly DateTime _minFechaNacimiento = DateTime.Now.Subtract(TimeSpan.FromDays(43800)); // 120 x 365
     
     public int SolicitarOpcion()
     {

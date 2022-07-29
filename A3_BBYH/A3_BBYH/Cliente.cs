@@ -12,11 +12,18 @@ public class Cliente
     
     public string? Email { get; set; }
 
+    /// <summary>
+    /// Actualiza los datos personales del cliente.
+    /// </summary>
+    /// <param name="c">Objeto Cliente con datos nuevos.</param>
     public void ActualizarDatos(Cliente c)
     {
         
     }
 
+    /// <summary>
+    /// Envía una solicitud para activar las notificaciones de movimientos por email.
+    /// </summary>
     public void ActivarNotificacionesEmail()
     {
         
