@@ -12,6 +12,8 @@ public class Cliente
     
     public string? Email { get; set; }
 
+    public bool Activo { get; set; }
+
     /// <summary>
     /// Actualiza los datos personales del cliente.
     /// </summary>
@@ -22,9 +24,9 @@ public class Cliente
     }
 
     /// <summary>
-    /// Envía una solicitud para activar las notificaciones de movimientos por email.
+    /// Setea el usuario como inactivo en el sistema.
     /// </summary>
-    public void ActivarNotificacionesEmail()
+    public void Desactivar()
     {
         
     }
