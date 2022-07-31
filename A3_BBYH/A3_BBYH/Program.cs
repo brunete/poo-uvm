@@ -18,7 +18,7 @@ internal class Program
         int opcion;
         do
         {
-            opcion = UtilsConsola.SolicitarOpcion();
+            opcion = UtilsConsola.SolicitarEntero("Elija una opción: ");
             EjecutarOpcion(opcion);
         } while (opcion != 3);
     }

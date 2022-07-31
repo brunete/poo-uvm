@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace A3_BBYH;
 
@@ -7,23 +6,6 @@ public class UtilidadesConsola
 {
     public readonly Regex FechaRegex = new("^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$");
     public readonly Regex EmailRegex = new("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-    
-    public int SolicitarOpcion()
-    {
-        MostrarMenu();
-        Console.Write("Elija una opción: ");
-        var input = Console.ReadLine();
-        Console.WriteLine();
-            
-        int opcion = 0;
-            
-        if (!string.IsNullOrEmpty(input))
-        {
-            int.TryParse(input, out opcion);
-        }
-
-        return opcion;
-    }
     
     private void MostrarMenu()
     {
@@ -43,7 +25,7 @@ public class UtilidadesConsola
         {
             if (string.IsNullOrEmpty(input))
             {
-                Console.Write("Ingrese un texto!: ");
+                Console.Write(texto);
                 input = Console.ReadLine();
                 continue;
             }
@@ -59,6 +41,21 @@ public class UtilidadesConsola
         }
             
         return input;
+    }
+    
+    public int SolicitarEntero(string texto)
+    {
+        MostrarMenu();
+        var input = SolicitarString(texto);
+        Console.WriteLine();
+        
+        int entero = 0;
+        if (!string.IsNullOrEmpty(input))
+        {
+            int.TryParse(input, out entero);
+        }
+
+        return entero;
     }
     
     public DateTime SolicitarFecha(string texto, DateTime minFecha, DateTime maxFecha)
