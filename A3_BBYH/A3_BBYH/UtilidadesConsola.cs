@@ -69,7 +69,7 @@ public class UtilidadesConsola
         if (fecha < minFecha || fecha > maxFecha)
         {
             // Para este caso, una mejor práctica sería crear una excepción personalizada que herede de Exception.
-            throw new Exception($"Fecha inválida, no puede ser previa al {minFecha.ToString("dd/mm/yyyy")}, ni posterior al {maxFecha.ToString("dd/mm/yyyy")}!"); 
+            throw new Exception($"Fecha inválida, no puede ser previa al {minFecha.ToString("dd/MM/yyyy")}, ni posterior al {maxFecha.ToString("dd/MM/yyyy")}!"); 
         }
 
         return fecha;
