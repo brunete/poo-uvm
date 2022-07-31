@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A3_BBYH", "A3_BBYH\A3_BBYH.csproj", "{9464B860-65DC-402D-B0A2-73B0516EEAE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A3_E3", "A3_E3\A3_E3.csproj", "{9464B860-65DC-402D-B0A2-73B0516EEAE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
