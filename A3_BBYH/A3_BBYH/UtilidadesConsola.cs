@@ -61,15 +61,15 @@ public class UtilidadesConsola
         return input;
     }
     
-    public DateTime SolicitarFecha(string texto, DateTime minFecha)
+    public DateTime SolicitarFecha(string texto, DateTime minFecha, DateTime maxFecha)
     {
         var fechaStr = SolicitarString(texto, FechaRegex);
         var fecha = DateTime.Parse(fechaStr);
 
-        if (fecha < minFecha)
+        if (fecha < minFecha || fecha > maxFecha)
         {
             // Para este caso, una mejor práctica sería crear una excepción personalizada que herede de Exception.
-            throw new Exception($"Fecha inválida, no puede ser previa al {minFecha.ToString("dd/mm/yyyy")}!"); 
+            throw new Exception($"Fecha inválida, no puede ser previa al {minFecha.ToString("dd/mm/yyyy")}, ni posterior al {maxFecha.ToString("dd/mm/yyyy")}!"); 
         }
 
         return fecha;

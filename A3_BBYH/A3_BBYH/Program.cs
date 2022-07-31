@@ -94,7 +94,7 @@ internal class Program
         {
             try
             {
-                var fechaNacimiento = UtilsConsola.SolicitarFecha("Fecha de nacimiento (dd/mm/aaaa): ", MinFechaNacimiento);
+                var fechaNacimiento = UtilsConsola.SolicitarFecha("Fecha de nacimiento (dd/mm/aaaa): ", MinFechaNacimiento, DateTime.Now);
                 cliente.FechaNacimiento = fechaNacimiento;
                 fechaOk = true;
             }
