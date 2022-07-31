@@ -18,7 +18,7 @@ public class UtilidadesConsola
         var input = Console.ReadLine();
         Console.WriteLine();
             
-        int opcion = -1;
+        int opcion = 0;
             
         if (!string.IsNullOrEmpty(input))
         {
@@ -33,7 +33,7 @@ public class UtilidadesConsola
         Console.WriteLine("== Actividad 3 - Menú ==");
         Console.WriteLine("1. Nuevo cliente");
         Console.WriteLine("2. Mostrar clientes");
-        Console.WriteLine("0. Salir");
+        Console.WriteLine("3. Salir");
     }
 
     public string SolicitarString(string texto, Regex? regex = null)

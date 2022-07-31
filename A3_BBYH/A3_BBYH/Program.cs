@@ -16,7 +16,7 @@ internal class Program
         {
             opcion = UtilsConsola.SolicitarOpcion();
             EjecutarOpcion(opcion);
-        } while (opcion != 0);
+        } while (opcion != 3);
     }
 
     private static void CargarDatosIniciales()
@@ -66,7 +66,7 @@ internal class Program
             case 2:
                 MostrarClientes();
                 break;
-            case 0:
+            case 3:
                 Console.WriteLine("Programa finalizado!\n");
                 break;
             default:
