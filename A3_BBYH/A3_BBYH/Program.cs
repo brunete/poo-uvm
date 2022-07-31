@@ -5,6 +5,10 @@ internal class Program
     private static readonly UtilidadesConsola UtilsConsola = new();
     private static readonly List<Cliente> Clientes = new();
     
+    // Usado para validación de fechas de nacimiento y para demostrar manejo de excepciones.
+    // Elección Arbitraria, 120 años en el pasado.
+    private static readonly DateTime MinFechaNacimiento = DateTime.Now.Subtract(TimeSpan.FromDays(43800)); // 120 x 365
+    
     private static int _idClienteActual;
         
     private static void Main(string[] args)
@@ -77,22 +81,30 @@ internal class Program
     
     private static void NuevoCliente()
     {
-        try
+        var cliente = new Cliente()
         {
-            Clientes.Add(new Cliente()
+            NumeroCliente = _idClienteActual++,
+            Nombre = UtilsConsola.SolicitarString("Nombre: "),
+            Apellido = UtilsConsola.SolicitarString("Apellido: "),
+            Email = UtilsConsola.SolicitarString("Email: ", UtilsConsola.EmailRegex)
+        };
+
+        bool fechaOk = false;
+        do
+        {
+            try
             {
-                NumeroCliente = _idClienteActual++,
-                Nombre = UtilsConsola.SolicitarString("Nombre: "),
-                Apellido = UtilsConsola.SolicitarString("Apellido: "),
-                FechaNacimiento = UtilsConsola.SolicitarFecha("Fecha de nacimiento (dd/mm/aaaa): "),
-                Email = UtilsConsola.SolicitarString("Email: ", UtilsConsola.EmailRegex)
-            });
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
+                var fechaNacimiento = UtilsConsola.SolicitarFecha("Fecha de nacimiento (dd/mm/aaaa): ", MinFechaNacimiento);
+                cliente.FechaNacimiento = fechaNacimiento;
+                fechaOk = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        } while (!fechaOk);
         
+        Clientes.Add(cliente);
         Console.WriteLine();
     }
 

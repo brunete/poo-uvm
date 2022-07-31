@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace A3_BBYH;
 
@@ -6,10 +7,6 @@ public class UtilidadesConsola
 {
     public readonly Regex FechaRegex = new("^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$");
     public readonly Regex EmailRegex = new("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-    
-    // Usado para validación de fechas de nacimiento y para demostrar manejo de excepciones.
-    // Elección Arbitraria, 120 años en el pasado.
-    private readonly DateTime _minFechaNacimiento = DateTime.Now.Subtract(TimeSpan.FromDays(43800)); // 120 x 365
     
     public int SolicitarOpcion()
     {
@@ -63,15 +60,16 @@ public class UtilidadesConsola
             
         return input;
     }
-        
-    public DateTime SolicitarFecha(string texto)
+    
+    public DateTime SolicitarFecha(string texto, DateTime minFecha)
     {
         var fechaStr = SolicitarString(texto, FechaRegex);
         var fecha = DateTime.Parse(fechaStr);
 
-        if (fecha < _minFechaNacimiento)
+        if (fecha < minFecha)
         {
-            throw new Exception("Fecha inválida!");
+            // Para este caso, una mejor práctica sería crear una excepción personalizada que herede de Exception.
+            throw new Exception($"Fecha inválida, no puede ser previa al {minFecha.ToString("dd/mm/yyyy")}!"); 
         }
 
         return fecha;
