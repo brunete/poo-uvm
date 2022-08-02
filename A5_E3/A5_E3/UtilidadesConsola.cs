@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace A5_E3.Ejercicio2;
+namespace A5_E3;
 
 public class UtilidadesConsola
 {

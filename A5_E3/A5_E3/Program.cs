@@ -1,8 +1,10 @@
-﻿namespace A5_E3.Ejercicio2;
+﻿using A5_E3.Ejercicio2;
+
+namespace A5_E3;
 
 public class Program
 {
-    private static UtilidadesConsola _consola = new UtilidadesConsola();
+    private static UtilidadesConsola _consola = new();
     
     public static void Main(string[] args)
     {
