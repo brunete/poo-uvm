@@ -40,9 +40,14 @@ public class Alumno : Usuario
         return false;
     }
 
-    public override string ToString()
+    public string StringLineaTabla()
     {
         return
             $"{NumControlEscolar,10}|{Nombre,8}|{Apellido,10}|{Sexo,6}|{FechaNacimiento.ToString("dd/MM/yyyy"),12}|{Semestre,5}";
+    }
+
+    public string StringBusqueda()
+    {
+        return $"{Nombre} {Apellido} ({Edad}) | Sexo: {Sexo} | Semestre: {Semestre}";
     }
 }

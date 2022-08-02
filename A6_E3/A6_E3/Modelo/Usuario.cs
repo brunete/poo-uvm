@@ -10,6 +10,8 @@ public class Usuario
 
     public DateTime FechaNacimiento { get; set; }
 
+    public int Edad => DateTime.Now.Subtract(FechaNacimiento).Days / 365;
+
     public string Sexo { get; set; }
 
     public Usuario()

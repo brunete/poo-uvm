@@ -52,7 +52,7 @@ internal class Program
 
                 break;
             case 4:
-                Console.WriteLine("Programa finalizado!");
+                Console.WriteLine("Programa finalizado...");
                 break;
             default:
                 Console.WriteLine("Opción inválida!");
@@ -74,7 +74,7 @@ internal class Program
                 // ConsultarMateriasDeAlumno();
                 break;
             case 4:
-                // BuscarAlumno();
+                BuscarAlumno();
                 break;
             case 5:
                 // ModificarAlumno();
@@ -165,14 +165,23 @@ internal class Program
 
             foreach (var alumno in _institucion.Alumnos)
             {
-                Console.WriteLine(alumno.ToString());
+                Console.WriteLine(alumno.StringLineaTabla());
             }
         }
         else
         {
-            Console.WriteLine("No hay alumnos");
+            Console.WriteLine("No hay alumnos registrados");
         }
 
+        Console.WriteLine();
+    }
+
+    private static void BuscarAlumno()
+    {
+        var numControl = _consola.SolicitarEntero("Num control: ");
+        var alumno = _institucion.BuscarAlumno(numControl);
+
+        Console.WriteLine(alumno != null ? alumno.StringBusqueda() : "Alumno no encontrado");
         Console.WriteLine();
     }
 }
