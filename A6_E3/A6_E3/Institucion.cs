@@ -1,11 +1,14 @@
-﻿using System.Runtime.CompilerServices;
-using A6_E3.Excepciones;
+﻿using A6_E3.Excepciones;
 using A6_E3.Modelo;
 
 namespace A6_E3;
 
 public class Institucion
 {
+    private int _numControlEscolar = 1;
+    private int _idMateria = 1;
+    private int _idCalificacion = 1;
+    
     public List<Alumno?> Alumnos { get; }
 
     public List<Profesor> Profesores { get; }
@@ -24,6 +27,9 @@ public class Institucion
     {
         if (!alumno.EsValido())
             throw new ProfesorInvalidoException();
+
+        alumno.NumControlEscolar = _numControlEscolar;
+        _numControlEscolar++;
 
         Alumnos.Add(alumno);
     }
@@ -57,6 +63,9 @@ public class Institucion
         if (!profesor.EsValido())
             throw new ProfesorInvalidoException();
 
+        profesor.NumControlEscolar = _numControlEscolar;
+        _numControlEscolar++;
+        
         Profesores.Add(profesor);
     }
 
@@ -89,6 +98,9 @@ public class Institucion
         if (!materia.EsValida())
             throw new MateriaInvalidaException();
 
+        materia.ID = _idMateria;
+        _idMateria++;
+        
         Materias.Add(materia);
     }
 
@@ -114,6 +126,8 @@ public class Institucion
         if (materia != null) Materias.Remove(materia);
     }
 
+    /* OTRAS OPERACIONES */
+    
     public void Calificar(Materia materia, Calificacion calificacion)
     {
         if (!materia.EsValida())
