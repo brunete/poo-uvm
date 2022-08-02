@@ -27,7 +27,7 @@ public class Alumno : Usuario
 
     public void ModificarDatos(Alumno alumno)
     {
-        Semestre = alumno.Semestre;
+        Semestre = alumno.Semestre != 0 ? alumno.Semestre : Semestre;
         base.ModificarDatos(alumno);
     }
 

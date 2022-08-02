@@ -42,4 +42,15 @@ public class Profesor : Usuario
 
         return false;
     }
+    
+    public string StringLineaTabla()
+    {
+        return
+            $"{NumControlEscolar,10}|{Nombre,8}|{Apellido,10}|{Sexo,6}|{FechaNacimiento.ToString("dd/MM/yyyy"),12}|{Titulo,10}|{CedulaProfesional,13}";
+    }
+
+    public string StringBusqueda()
+    {
+        return $"{Nombre} {Apellido} ({Edad}) | Sexo: {Sexo} | Título: {Titulo} | Cédula prof: {CedulaProfesional}";
+    }
 }

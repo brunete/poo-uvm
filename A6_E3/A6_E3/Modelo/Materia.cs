@@ -6,18 +6,14 @@ public class Materia
 
     public string Nombre { get; set; }
 
-    public byte Creditos { get; set; }
+    public int Creditos { get; set; }
 
     public Profesor Profesor { get; set; }
 
     public List<Calificacion> Calificaciones { get; }
 
-    public Materia(int id, string nombre, byte creditos, Profesor profesor)
+    public Materia()
     {
-        ID = id;
-        Nombre = nombre;
-        Creditos = creditos;
-        Profesor = profesor;
         Calificaciones = new List<Calificacion>();
     }
     
@@ -64,5 +60,15 @@ public class Materia
         }
         
         return true;
+    }
+
+    public string StringLineaTabla()
+    {
+        return $"{ID,4}|{Nombre,8}|{Creditos,10}|{Profesor.Nombre + " " + Profesor.Apellido,10}";
+    }
+
+    public string StringBusqueda()
+    {
+        return $"[{ID}] {Nombre} ({Creditos}) | Profesor: {Profesor.Nombre} {Profesor.Apellido}";
     }
 }

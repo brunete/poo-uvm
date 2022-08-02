@@ -8,7 +8,7 @@ public class Institucion
     private int _numControlEscolar = 1;
     private int _idMateria = 1;
     private int _idCalificacion = 1;
-    
+
     public List<Alumno?> Alumnos { get; }
 
     public List<Profesor> Profesores { get; }
@@ -48,16 +48,21 @@ public class Institucion
 
         if (alumnoViejo == null)
             throw new NoEncontradoException("Alumno no encontrado.");
-        
+
         alumnoViejo.ModificarDatos(alumno);
     }
 
     public void EliminarAlumno(int numControlEscolar)
     {
-        if (numControlEscolar <= 0) throw new IdInvalidoException();
+        if (numControlEscolar <= 0)
+            throw new IdInvalidoException();
 
         var alumno = BuscarAlumno(numControlEscolar);
-        if (alumno != null) Alumnos.Remove(alumno);
+
+        if (alumno == null)
+            throw new NoEncontradoException("Alumno no encontrado.");
+
+        Alumnos.Remove(alumno);
     }
 
     /* PROFESORES */
@@ -69,7 +74,7 @@ public class Institucion
 
         profesor.NumControlEscolar = _numControlEscolar;
         _numControlEscolar++;
-        
+
         Profesores.Add(profesor);
     }
 
@@ -99,12 +104,12 @@ public class Institucion
 
     public void NuevaMateria(Materia materia)
     {
+        materia.ID = _idMateria;
+        _idMateria++;
+
         if (!materia.EsValida())
             throw new MateriaInvalidaException();
 
-        materia.ID = _idMateria;
-        _idMateria++;
-        
         Materias.Add(materia);
     }
 
@@ -131,7 +136,7 @@ public class Institucion
     }
 
     /* OTRAS OPERACIONES */
-    
+
     public void Calificar(Materia materia, Calificacion calificacion)
     {
         if (!materia.EsValida())

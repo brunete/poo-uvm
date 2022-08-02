@@ -14,16 +14,12 @@ public class Usuario
 
     public string Sexo { get; set; }
 
-    public Usuario()
-    {
-    }
-
     public void ModificarDatos(Usuario usuario)
     {
-        Nombre = usuario.Nombre;
-        Apellido = usuario.Apellido;
+        Nombre = string.IsNullOrEmpty(usuario.Nombre) ? Nombre : usuario.Nombre;
+        Apellido = string.IsNullOrEmpty(usuario.Apellido) ? Apellido : usuario.Apellido;
         FechaNacimiento = usuario.FechaNacimiento;
-        Sexo = usuario.Sexo;
+        Sexo = string.IsNullOrEmpty(usuario.Sexo) ? Sexo : usuario.Sexo;
     }
 
     public bool EsValido()
