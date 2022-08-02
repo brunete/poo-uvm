@@ -64,7 +64,7 @@ public class Materia
 
     public string StringLineaTabla()
     {
-        return $"{ID,4}|{Nombre,8}|{Creditos,10}|{Profesor.Nombre + " " + Profesor.Apellido,10}";
+        return $"{ID,4}|{Nombre,10}|{Creditos,10}|{Profesor.Nombre + " " + Profesor.Apellido,10}";
     }
 
     public string StringBusqueda()

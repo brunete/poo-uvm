@@ -21,11 +21,13 @@ public class UtilidadesConsola
         Console.WriteLine("== Actividad 6 - Alumnos ==");
         Console.WriteLine("1. Nuevo");
         Console.WriteLine("2. Consultar");
-        Console.WriteLine("3. Consultar materias");
-        Console.WriteLine("4. Buscar");
-        Console.WriteLine("5. Modificar");
-        Console.WriteLine("6. Eliminar");
-        Console.WriteLine("7. Volver al menú principal");
+        Console.WriteLine("3. Buscar");
+        Console.WriteLine("4. Modificar");
+        Console.WriteLine("5. Eliminar");
+        Console.WriteLine("6. Consultar materias");
+        Console.WriteLine("7. Registrar materia");
+        Console.WriteLine("8. Eliminar materia");
+        Console.WriteLine("9. Volver al menú principal");
     }
 
     public void MostrarMenuProfesores()

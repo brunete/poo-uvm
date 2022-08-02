@@ -11,7 +11,8 @@ internal class Program
 
     private static void Main(string[] args)
     {
-        CargarDatosPrueba();
+        if (_consola.SolicitarBool("Cargar datos de prueba? (S/N): ")) 
+            CargarDatosPrueba();
 
         int opcion;
         do
@@ -126,7 +127,7 @@ internal class Program
                     _consola.MostrarMenuAlumnos();
                     opcionSubmenu = _consola.SolicitarEntero("Elija una opción: ");
                     EjecutarOpcionAlumnos(opcionSubmenu);
-                } while (opcionSubmenu != 7);
+                } while (opcionSubmenu != 9);
 
                 break;
             case 2:
@@ -167,18 +168,24 @@ internal class Program
                 ConsultarAlumnos();
                 break;
             case 3:
-                // ConsultarMateriasDeAlumno();
-                break;
-            case 4:
                 BuscarAlumno();
                 break;
-            case 5:
+            case 4:
                 ModificarAlumno();
                 break;
-            case 6:
+            case 5:
                 EliminarAlumno();
                 break;
+            case 6:
+                // ConsultarMaterias();
+                break;
             case 7:
+                // Registrar materia();
+                break;
+            case 8:
+                // Eliminar materia();
+                break;
+            case 9:
                 break;
             default:
                 Console.WriteLine("Opción inválida!");
@@ -460,7 +467,7 @@ internal class Program
         if (_institucion.Materias.Any())
         {
             var encabezado =
-                $"{" ID ",4}|{" Nombre ",8}|{" Créditos ",10}|{" Profesor ",10}";
+                $"{" ID ",4}|{" Nombre ",10}|{" Créditos ",10}|{" Profesor ",10}";
             Console.WriteLine(encabezado);
 
             foreach (var materia in _institucion.Materias)
@@ -487,7 +494,7 @@ internal class Program
 
     private static void ModificarMateria()
     {
-        ConsultarProfesores();
+        ConsultarMaterias();
         if (_institucion.Materias.Any())
         {
             try
