@@ -21,7 +21,7 @@ public class Materia
         Calificaciones = new List<Calificacion>();
     }
     
-    public void ActualizarDatos(Materia materia)
+    public void ModificarDatos(Materia materia)
     {
         throw new NotImplementedException();
     }
@@ -31,7 +31,7 @@ public class Materia
         throw new NotImplementedException();
     }
 
-    public void ActualizarCalificacion(Calificacion calificacion)
+    public void ModificarCalificacion(Calificacion calificacion)
     {
         throw new NotImplementedException();
     }

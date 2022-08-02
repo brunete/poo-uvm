@@ -8,11 +8,11 @@ public class Profesor : Usuario
 
     public string CedulaProfesional { get; set; }
 
-    public void ActualizarDatos(Profesor profesor)
+    public void ModificarDatos(Profesor profesor)
     {
         if (profesor.EsValido())
         {
-            base.ActualizarDatos(profesor);
+            base.ModificarDatos(profesor);
 
             Titulo = profesor.Titulo;
             CedulaProfesional = profesor.CedulaProfesional;
@@ -23,7 +23,7 @@ public class Profesor : Usuario
         }
     }
 
-    public bool EsValido()
+    public new bool EsValido()
     {
         if (base.EsValido())
         {

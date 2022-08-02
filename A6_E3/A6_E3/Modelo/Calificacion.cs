@@ -18,7 +18,7 @@ public class Calificacion
         Nota = nota;
     }
 
-    public void ActualizarCalificacion(Calificacion calificacion)
+    public void ModificarCalificacion(Calificacion calificacion)
     {
         throw new NotImplementedException();
     }

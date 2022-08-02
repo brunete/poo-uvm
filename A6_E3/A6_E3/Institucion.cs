@@ -39,13 +39,17 @@ public class Institucion
         return Alumnos.Find(a => a.NumControlEscolar == numControlEscolar);
     }
 
-    public void ActualizarAlumno(Alumno alumno)
+    public void ModificarAlumno(Alumno alumno)
     {
         if (!alumno.EsValido())
             throw new AlumnoInvalidoException();
 
         var alumnoViejo = BuscarAlumno(alumno.NumControlEscolar);
-        alumnoViejo?.ActualizarDatos(alumno);
+
+        if (alumnoViejo == null)
+            throw new NoEncontradoException("Alumno no encontrado.");
+        
+        alumnoViejo.ModificarDatos(alumno);
     }
 
     public void EliminarAlumno(int numControlEscolar)
@@ -74,13 +78,13 @@ public class Institucion
         return Profesores.Find(p => p.NumControlEscolar == numControlEscolar);
     }
 
-    public void ActualizarProfesor(Profesor profesor)
+    public void ModificarProfesor(Profesor profesor)
     {
         if (!profesor.EsValido())
             throw new ProfesorInvalidoException();
 
         var profesorViejo = BuscarProfesor(profesor.NumControlEscolar);
-        profesorViejo?.ActualizarDatos(profesor);
+        profesorViejo?.ModificarDatos(profesor);
     }
 
     public void EliminarProfesor(int numControlEscolar)
@@ -109,13 +113,13 @@ public class Institucion
         return Materias.Find(m => m.ID == id);
     }
 
-    public void ActualizarMateria(Materia materia)
+    public void ModificarMateria(Materia materia)
     {
         if (!materia.EsValida())
             throw new AlumnoInvalidoException();
 
         var materiaVieja = BuscarMateria(materia.ID);
-        materiaVieja?.ActualizarDatos(materia);
+        materiaVieja?.ModificarDatos(materia);
     }
 
     public void EliminarMateria(int id)

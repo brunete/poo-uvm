@@ -25,15 +25,16 @@ public class Alumno : Usuario
         }
     }
 
-    public bool EsValido()
+    public void ModificarDatos(Alumno alumno)
+    {
+        Semestre = alumno.Semestre;
+        base.ModificarDatos(alumno);
+    }
+
+    public new bool EsValido()
     {
         if (base.EsValido())
         {
-            if (Materias == null)
-            {
-                return false;
-            }
-
             return true;
         }
 

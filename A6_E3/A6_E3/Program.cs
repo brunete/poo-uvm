@@ -1,4 +1,5 @@
-﻿using A6_E3.Modelo;
+﻿using A6_E3.Excepciones;
+using A6_E3.Modelo;
 using A6_E3.Utils;
 
 namespace A6_E3;
@@ -77,7 +78,7 @@ internal class Program
                 BuscarAlumno();
                 break;
             case 5:
-                // ModificarAlumno();
+                ModificarAlumno();
                 break;
             case 6:
                 // EliminarAlumno();
@@ -150,8 +151,8 @@ internal class Program
         {
             Nombre = _consola.SolicitarString("Nombre: "),
             Apellido = _consola.SolicitarString("Apellido: "),
-            FechaNacimiento = _consola.SolicitarFecha("Fecha de nacimiento: "),
-            Sexo = _consola.SolicitarString("Sexo: ", null, new string[] { "M", "F" }).ToUpper()
+            FechaNacimiento = _consola.SolicitarFecha("Fecha de nacimiento (dd/mm/aaaa): "),
+            Sexo = _consola.SolicitarString("Sexo (M/F): ", null, new string[] { "M", "F" }).ToUpper()
         });
     }
 
@@ -183,5 +184,27 @@ internal class Program
 
         Console.WriteLine(alumno != null ? alumno.StringBusqueda() : "Alumno no encontrado");
         Console.WriteLine();
+    }
+
+    private static void ModificarAlumno()
+    {
+        int numControl = _consola.SolicitarEntero("Num. control: ");
+
+        try
+        {
+            _institucion.ModificarAlumno(new Alumno()
+            {
+                NumControlEscolar = numControl,
+                Nombre = _consola.SolicitarString("Nombre: "),
+                Apellido = _consola.SolicitarString("Apellido: "),
+                FechaNacimiento = _consola.SolicitarFecha("Fecha de nacimiento (dd/mm/aaaa): "),
+                Sexo = _consola.SolicitarString("Sexo (M/F): ", null, new string[] { "M", "F" }).ToUpper(),
+                Semestre = _consola.SolicitarEntero("Semestre: ")
+            });
+        }
+        catch (NoEncontradoException e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 }

@@ -18,9 +18,12 @@ public class Usuario
     {
     }
 
-    public void ActualizarDatos(Usuario usuario)
+    public void ModificarDatos(Usuario usuario)
     {
-        throw new NotImplementedException();
+        Nombre = usuario.Nombre;
+        Apellido = usuario.Apellido;
+        FechaNacimiento = usuario.FechaNacimiento;
+        Sexo = usuario.Sexo;
     }
 
     public bool EsValido()
