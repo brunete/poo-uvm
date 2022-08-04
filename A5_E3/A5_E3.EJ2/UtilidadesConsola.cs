@@ -1,10 +1,8 @@
-﻿using System.Text.RegularExpressions;
-
-namespace A5_E3;
+﻿namespace A5_E3.EJ2;
 
 public class UtilidadesConsola
 {
-    public string SolicitarString(string texto, Regex? regex = null, string[]? valoresAceptados = null)
+    public string SolicitarString(string texto, string[]? valoresAceptados = null)
     {
         Console.Write(texto);
         var input = Console.ReadLine();
@@ -19,13 +17,6 @@ public class UtilidadesConsola
                 continue;
             }
                 
-            if (regex != null && !regex.IsMatch(input))
-            {
-                Console.Write("Formato inválido!: ");
-                input = Console.ReadLine();
-                continue;
-            }
-
             if (valoresAceptados != null && !valoresAceptados.Contains(input.ToUpper()))
             {
                 Console.Write("Ingrese un valor aceptado!: ");

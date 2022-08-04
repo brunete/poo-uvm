@@ -1,4 +1,4 @@
-﻿namespace A5_E3.Ejercicio2;
+﻿namespace A5_E3.EJ2;
 
 public class Persona
 {
