@@ -1,4 +1,5 @@
-﻿using A6_E3.Excepciones;
+﻿using System.Xml.Serialization;
+using A6_E3.Excepciones;
 using A6_E3.Modelo;
 using A6_E3.Utils;
 
@@ -129,7 +130,7 @@ internal class Program
                     _consola.MostrarMenuAlumnos();
                     opcionSubmenu = _consola.SolicitarEntero("Elija una opción: ");
                     EjecutarOpcionAlumnos(opcionSubmenu);
-                } while (opcionSubmenu != 9);
+                } while (opcionSubmenu != 8);
 
                 break;
             case 2:
@@ -179,15 +180,12 @@ internal class Program
                 EliminarAlumno();
                 break;
             case 6:
-                // ConsultarMaterias();
+                ConsultarMateriasDeAlumno();
                 break;
             case 7:
-                // Registrar materia();
+                ModificarMateriasDeAlumno();
                 break;
             case 8:
-                // Eliminar materia();
-                break;
-            case 9:
                 break;
             default:
                 Console.WriteLine("Opción inválida!");
@@ -230,7 +228,7 @@ internal class Program
                 NuevaMateria();
                 break;
             case 2:
-                ConsultarMaterias();
+                MostrarMaterias(_institucion.Materias);
                 break;
             case 3:
                 BuscarMateria();
@@ -331,6 +329,134 @@ internal class Program
             {
                 int numControl = _consola.SolicitarEntero("Num. control: ");
                 _institucion.EliminarAlumno(numControl);
+            }
+            catch (IdInvalidoException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (NoEncontradoException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+    }
+
+    private static void ConsultarMateriasDeAlumno()
+    {
+        Console.WriteLine("Alumnos disponibles:");
+        ConsultarAlumnos();
+        if (_institucion.Alumnos.Any())
+        {
+            try
+            {
+                var idAlumno =
+                    _consola.SolicitarEntero("Ingrese el número de control escolar del alumno a consultar: ");
+
+                var a = _institucion.Alumnos.First(x => x.NumControlEscolar == idAlumno);
+
+                if (a == null)
+                {
+                    Console.WriteLine("Alumno inválido!");
+                    return;
+                }
+                
+                Console.WriteLine($"Materias asignadas a {a.Nombre} {a.Apellido}");
+                MostrarMaterias(a.Materias);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+    }
+
+    private static void ModificarMateriasDeAlumno()
+    {
+        Console.WriteLine("Alumnos disponibles:");
+        ConsultarAlumnos();
+        if (_institucion.Alumnos.Any())
+        {
+            try
+            {
+                var idAlumno = _consola.SolicitarEntero("Ingrese el número de control escolar del alumno a modificar: ");
+                var a = _institucion.Alumnos.First(x => x.NumControlEscolar == idAlumno);
+
+                if (a == null)
+                {
+                    Console.WriteLine("Alumno inválido!");
+                    return;
+                }
+
+                Console.WriteLine($"Materias asignadas a {a.Nombre} {a.Apellido}");
+                MostrarMaterias(a.Materias);
+
+                int opcion;
+                do
+                {
+                    _consola.MostrarMenuMateriasDeAlumno();
+                    opcion = _consola.SolicitarEntero("¿Qué desea hacer?: ");
+
+                    int idMateria;
+                    Materia? materia;
+
+                    switch (opcion)
+                    {
+                        case 1:
+                            Console.WriteLine("Materias disponibles: ");
+                            MostrarMaterias(_institucion.Materias.Except(a.Materias).ToList());
+
+                            idMateria = _consola.SolicitarEntero("Ingrese el ID de la materia a asignar: ");
+                            materia = _institucion.BuscarMateria(idMateria);
+
+                            if (materia != null)
+                            {
+                                try
+                                {
+                                    a.AgregarMateria(materia);
+                                    Console.WriteLine("Materia agregada!\n");
+                                }
+                                catch (MateriaInvalidaException)
+                                {
+                                    Console.WriteLine("Materia inválida!\n");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("ID inválido!");
+                            }
+
+                            break;
+                        case 2:
+                            Console.WriteLine($"Materias asignadas a {a.Nombre} {a.Apellido}");
+                            MostrarMaterias(a.Materias);
+                            
+                            idMateria = _consola.SolicitarEntero("Ingrese el ID de la materia a eliminar: ");
+                            materia = _institucion.BuscarMateria(idMateria);
+
+                            if (materia != null)
+                            {
+                                try
+                                {
+                                    a.EliminarMateria(materia);
+                                    Console.WriteLine("Materia eliminada!\n");
+                                }
+                                catch (MateriaInvalidaException)
+                                {
+                                    Console.WriteLine("Materia inválida!\n");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("ID inválido!\n");
+                            }
+
+                            break;
+                        default:
+                            Console.WriteLine("Opción incorrecta!");
+                            break;
+                    }
+                } while (opcion != 3);
             }
             catch (IdInvalidoException e)
             {
@@ -466,7 +592,7 @@ internal class Program
         _institucion.NuevaMateria(materia);
     }
 
-    private static void ConsultarMaterias()
+    private static void MostrarMaterias(List<Materia?> materias)
     {
         if (_institucion.Materias.Any())
         {
@@ -474,7 +600,7 @@ internal class Program
                 $"{" ID ",4}|{" Nombre ",10}|{" Créditos ",10}|{" Profesor ",10}";
             Console.WriteLine(encabezado);
 
-            foreach (var materia in _institucion.Materias)
+            foreach (var materia in materias)
             {
                 Console.WriteLine(materia.StringLineaTabla());
             }
@@ -498,7 +624,7 @@ internal class Program
 
     private static void ModificarMateria()
     {
-        ConsultarMaterias();
+        MostrarMaterias(_institucion.Materias);
         if (_institucion.Materias.Any())
         {
             try
@@ -535,7 +661,7 @@ internal class Program
 
     private static void EliminarMateria()
     {
-        ConsultarMaterias();
+        MostrarMaterias(_institucion.Materias);
         if (_institucion.Materias.Any())
         {
             try

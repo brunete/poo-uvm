@@ -6,7 +6,7 @@ namespace A6_E3.Utils;
 public class UtilidadesConsola
 {
     public readonly Regex FechaRegex = new("^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$");
-    
+
     public void MostrarMenuPrincipal()
     {
         Console.WriteLine("== Actividad 6 - Menú Principal ==");
@@ -15,7 +15,7 @@ public class UtilidadesConsola
         Console.WriteLine("3. Operaciones de MATERIAS");
         Console.WriteLine("4. Salir");
     }
-    
+
     public void MostrarMenuAlumnos()
     {
         Console.WriteLine("== Actividad 6 - Alumnos ==");
@@ -25,9 +25,8 @@ public class UtilidadesConsola
         Console.WriteLine("4. Modificar");
         Console.WriteLine("5. Eliminar");
         Console.WriteLine("6. Consultar materias");
-        Console.WriteLine("7. Registrar materia");
-        Console.WriteLine("8. Eliminar materia");
-        Console.WriteLine("9. Volver al menú principal");
+        Console.WriteLine("7. Modificar materias");
+        Console.WriteLine("8. Volver al menú principal");
     }
 
     public void MostrarMenuProfesores()
@@ -52,11 +51,19 @@ public class UtilidadesConsola
         Console.WriteLine("6. Volver al menú principal");
     }
 
+    public void MostrarMenuMateriasDeAlumno()
+    {
+        Console.WriteLine("== Actividad 6 - Materias de Alumno ==");
+        Console.WriteLine("1. Agregar materia");
+        Console.WriteLine("2. Eliminar materia");
+        Console.WriteLine("3. Volver al menú de alumnos");
+    }
+
     public string SolicitarString(string texto, Regex? regex = null, string[]? valoresAceptados = null)
     {
-        if (!string.IsNullOrEmpty(texto)) 
+        if (!string.IsNullOrEmpty(texto))
             Console.Write(texto);
-        
+
         var input = Console.ReadLine();
 
         bool inputValido = false;
@@ -64,13 +71,13 @@ public class UtilidadesConsola
         {
             if (string.IsNullOrEmpty(input))
             {
-                if (!string.IsNullOrEmpty(texto)) 
+                if (!string.IsNullOrEmpty(texto))
                     Console.Write(texto);
-                
+
                 input = Console.ReadLine();
                 continue;
             }
-                
+
             if (regex != null && !regex.IsMatch(input))
             {
                 Console.Write("Formato inválido!: ");
@@ -87,24 +94,24 @@ public class UtilidadesConsola
 
             inputValido = true;
         }
-            
+
         return input;
     }
-    
+
     public int SolicitarEntero(string texto)
     {
         var input = SolicitarString(texto);
         Console.WriteLine();
-        
+
         int entero = 0;
         if (!string.IsNullOrEmpty(input))
         {
             int.TryParse(input, out entero);
         }
-        
+
         return entero;
     }
-    
+
     public DateTime SolicitarFecha(string texto, DateTime? minFecha = null, DateTime? maxFecha = null)
     {
         var fechaStr = SolicitarString(texto, FechaRegex);
@@ -113,16 +120,16 @@ public class UtilidadesConsola
         if ((minFecha != null && fecha < minFecha) ||
             (maxFecha != null && fecha > maxFecha))
         {
-            throw FechaInvalidaException.ConFechas(minFecha.Value, maxFecha.Value);           
+            throw FechaInvalidaException.ConFechas(minFecha.Value, maxFecha.Value);
         }
-        
+
         return fecha;
     }
 
     public bool SolicitarBool(string texto)
     {
         string input;
-        
+
         do
         {
             input = SolicitarString(texto);

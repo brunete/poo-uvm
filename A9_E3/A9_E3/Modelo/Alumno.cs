@@ -6,16 +6,16 @@ public class Alumno : Persona
 {
     public int Semestre { get; set; }
 
-    public List<Materia> Materias { get; }
+    public List<Materia?> Materias { get; }
 
     public Alumno()
     {
-        Materias = new List<Materia>();
+        Materias = new List<Materia?>();
     }
 
-    public void AgregarMateria(Materia materia)
+    public void AgregarMateria(Materia? materia)
     {
-        if (materia.EsValida())
+        if (materia.EsValida() && Materias.All(x => x.ID != materia.ID))
         {
             Materias.Add(materia);
         }
@@ -25,6 +25,18 @@ public class Alumno : Persona
         }
     }
 
+    public void EliminarMateria(Materia? materia)
+    {
+        if (materia.EsValida() && Materias.Any(x => x.ID == materia.ID))
+        {
+            Materias.Remove(materia);
+        }
+        else
+        {
+            throw new MateriaInvalidaException();
+        }
+    }
+    
     public void ModificarDatos(Alumno alumno)
     {
         Semestre = alumno.Semestre != 0 ? alumno.Semestre : Semestre;

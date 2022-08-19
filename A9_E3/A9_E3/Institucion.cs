@@ -7,19 +7,18 @@ public class Institucion
 {
     private int _numControlEscolar = 1;
     private int _idMateria = 1;
-    private int _idCalificacion = 1;
 
     public List<Alumno?> Alumnos { get; }
 
     public List<Profesor> Profesores { get; }
 
-    public List<Materia> Materias { get; }
+    public List<Materia?> Materias { get; }
 
     public Institucion()
     {
         Alumnos = new List<Alumno?>();
         Profesores = new List<Profesor>();
-        Materias = new List<Materia>();
+        Materias = new List<Materia?>();
     }
 
     /* ALUMNOS */
@@ -102,7 +101,7 @@ public class Institucion
 
     /* MATERIAS */
 
-    public void NuevaMateria(Materia materia)
+    public void NuevaMateria(Materia? materia)
     {
         materia.ID = _idMateria;
         _idMateria++;
